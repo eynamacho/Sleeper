@@ -28,48 +28,29 @@
 {
      NSLog(@"App in background");
     
-   // NSDate *date1test = [[NSDate alloc] init];
-    //[[NSUserDefaults standardUserDefaults] setObject:date1test forKey:@"date1"];
-    //[[NSUserDefaults standardUserDefaults] synchronize];
-    //NSDate *date1 = [[NSUserDefaults standardUserDefaults]objectForKey:@"date1"];
-    //NSDate *date2 = [[NSDate alloc]init];
-  //  NSTimeInterval dateOfResign = fabs([date2 timeIntervalSinceDate:date1]);
+    NSDate *thisMagicMoment = [NSDate date];
+    [[NSUserDefaults standardUserDefaults] setObject:thisMagicMoment forKey:@"lastMagicMoment"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
-    self.dateOfResign = [NSDate date];
-    NSTimeInterval timeSpentInBackground = fabs([[NSDate date] timeIntervalSinceDate:self.dateOfResign]);
-    
-    NSString *newMessage = [NSString stringWithFormat:@"Welcome back!You have been gone for %f seconds",timeSpentInBackground];
-     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:newMessage delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    
-    [alert show];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-   // NSDate *dateOfResign = [NSDate date];
-  //  NSTimeInterval seconds = fabs([dateOfResign timeIntervalSinceNow])*100000.0;
-   
-   // NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    //[dateFormatter setDateFormat:@"HH:mm:ss"];
-    //NSString *dateInString = [dateFormatter stringFromDate:dateOfResign];
-
-  //  float secondsProper = seconds*-1;
+   //self.dateOfResign = [NSDate date];
+   // NSTimeInterval timeSpentInBackground = [[NSDate date] timeIntervalSinceDate:self.dateOfResign];
     
-//    NSDate *date1test = [[NSDate alloc] init];
-//    [[NSUserDefaults standardUserDefaults] setObject:date1test forKey:@"date1"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    NSDate *date1 = [[NSUserDefaults standardUserDefaults]objectForKey:@"date1"];
-//    NSDate *date2 = [[NSDate alloc]init];
-//    NSTimeInterval seconds = fabs([date2 timeIntervalSinceDate:date1]);
-//    
-//     
-//     NSString *newMessage = [NSString stringWithFormat:@"Welcome back!You have been gone for %f seconds",seconds];
-//    
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:newMessage delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-//    
-//    [alert show];
+    NSDate *thisMagicMoment = [NSDate date];
+    NSDate *lastMagicMoment = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:@"lastMagicMoment"];
+    
+     NSTimeInterval timeSpentInBackground = fabs([thisMagicMoment timeIntervalSinceDate:lastMagicMoment]);
+    
+    NSString *newMessage = [NSString stringWithFormat:@"Welcome back!You have been gone for %f seconds",timeSpentInBackground];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:newMessage delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+    
+    [alert show];
+ 
     
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
